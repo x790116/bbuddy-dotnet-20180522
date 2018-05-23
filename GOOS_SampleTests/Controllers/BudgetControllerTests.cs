@@ -1,7 +1,8 @@
 ﻿using System;
+using FluentAssertions;
 using GOOS_Sample.Controllers;
 using GOOS_Sample.Models;
-using GOOS_Sample.Repositories;
+using GOOS_Sample.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
@@ -11,18 +12,18 @@ namespace GOOS_SampleTests.Controllers
     public class BudgetControllerTests
     {
         [TestMethod]
-        public void Add_Budget_should_Call_Repo_Add()
+        public void Add_Budget_should_Call_Service_Add()
         {
             //// Arrange
-            var stubBudgetRepo = Substitute.For<IBudgetRepository>();
+            var stubBudgetService = Substitute.For<IBudgetService>();
             BudgetViewModel model = new BudgetViewModel();
-            BudgetController ctrl = new BudgetController(stubBudgetRepo);
+            BudgetController ctrl = new BudgetController(stubBudgetService);
 
             //// Act
             ctrl.AddBudget(model);
 
             //// Assert
-            stubBudgetRepo.Received().Add(model);
+            stubBudgetService.Received().Add(model);
         }
     }
 }

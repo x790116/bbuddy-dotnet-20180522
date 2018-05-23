@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using GOOS_Sample.Models;
-using GOOS_Sample.Repositories;
+using GOOS_Sample.Services;
 
 namespace GOOS_Sample.Controllers
 {
     public class BudgetController : Controller
     {
-        private readonly IBudgetRepository _repository;
+        private readonly IBudgetService _service;
 
-        public BudgetController(IBudgetRepository repository)
+        public BudgetController(IBudgetService service)
         {
-            this._repository = repository;
+            this._service = service;
         }
 
         public ActionResult Add()
@@ -25,16 +22,14 @@ namespace GOOS_Sample.Controllers
         [HttpPost]
         public ActionResult AddBudget(BudgetViewModel model)
         {
-            this._repository.Add(model);
+            this._service.Add(model);
 
             return RedirectToAction("List");
         }
 
         public ActionResult List()
         {
-            BudgetViewModel model = new BudgetViewModel() { };
-            model.Month = "2018-05";
-            model.Amount = "500";
+            var model = this._service.Get();
 
             return View(model);
         }
