@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BudgetControllerTests.cs" />
+    <Compile Include="Services\BudgetServiceTests.cs" />
     <Compile Include="Steps\BudgetSteps.cs" />
     <Compile Include="Feature\Budget.feature.cs">
       <AutoGen>True</AutoGen>
