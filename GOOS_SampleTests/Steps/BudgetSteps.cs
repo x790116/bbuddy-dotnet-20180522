@@ -1,11 +1,13 @@
-﻿using System;
+﻿using FluentAssertions;
 using FluentAutomation;
+using GOOS_Sample.Models;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
-namespace GOOS_SampleTests
+namespace GOOS_SampleTests.Steps
 {
     [Binding]
-    public class BudgetSteps:FluentTest
+    public class BudgetSteps : FluentTest
     {
         [BeforeFeature()]
         [Scope(Tag = "web")]
@@ -22,10 +24,15 @@ namespace GOOS_SampleTests
                 .Enter(amount).In("#amount")
                 .Click("#save");
         }
-        
+
         [Then(@"the following Budget will be added")]
         public void ThenTheFollowingBudgetWillBeAdded(Table table)
         {
+            var month = table.CreateInstance<BudgetViewModel>().Month;
+            var amount = table.CreateInstance<BudgetViewModel>().Amount;
+
+            I.Assert.Text(month).In("#month");
+            I.Assert.Text(amount).In("#amount");
         }
     }
 }

@@ -1,0 +1,13 @@
+﻿@model GOOS_Sample.Models.BudgetViewModel
+@{
+    ViewBag.Title = "Budget List";
+}
+
+<h2>@ViewBag.Title.</h2>
+<hr />
+<div class="form-group">
+    <div class="col-md-10">
+        Month : @Html.TextBoxFor(i => i.Month, htmlAttributes: new { id = "month" })
+        Amount : @Html.TextBoxFor(i => i.Amount, htmlAttributes: new { id = "amount" })
+    </div>
+</div>
