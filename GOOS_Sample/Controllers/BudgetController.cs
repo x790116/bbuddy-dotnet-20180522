@@ -4,11 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GOOS_Sample.Models;
+using GOOS_Sample.Repositories;
 
 namespace GOOS_Sample.Controllers
 {
     public class BudgetController : Controller
     {
+        private readonly IBudgetRepository _repository;
+
+        public BudgetController(IBudgetRepository repository)
+        {
+            this._repository = repository;
+        }
+
         public ActionResult Add()
         {
             return View();
@@ -17,6 +25,8 @@ namespace GOOS_Sample.Controllers
         [HttpPost]
         public ActionResult AddBudget(BudgetViewModel model)
         {
+            this._repository.Add(model);
+
             return RedirectToAction("List");
         }
 

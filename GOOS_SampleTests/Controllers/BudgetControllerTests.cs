@@ -10,22 +10,19 @@ namespace GOOS_SampleTests.Controllers
     [TestClass]
     public class BudgetControllerTests
     {
-        private readonly BudgetController _ctrl;
-
-        public BudgetControllerTests(BudgetController ctrl)
-        {
-            this._ctrl = ctrl;
-        }
-
         [TestMethod]
         public void Add_Budget_should_Call_Repo_Add()
         {
-            BudgetViewModel model = new BudgetViewModel();
-            this._ctrl.AddBudget(model);
-
+            //// Arrange
             var stubBudgetRepo = Substitute.For<IBudgetRepository>();
+            BudgetViewModel model = new BudgetViewModel();
+            BudgetController ctrl = new BudgetController(stubBudgetRepo);
 
-            stubBudgetRepo.Received().Add();
+            //// Act
+            ctrl.AddBudget(model);
+
+            //// Assert
+            stubBudgetRepo.Received().Add(model);
         }
     }
 }
