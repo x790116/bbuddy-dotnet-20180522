@@ -28,16 +28,30 @@ namespace GOOS_Sample.Services
             }
             else
             {
-                var startAmountPerDay = GetAmountPerDay(startDateTime);
-                var endAmountPerDay = GetAmountPerDay(endDateTime);
-                var startResult = startAmountPerDay * (DateTime.DaysInMonth(startDateTime.Year, startDateTime.Month) - startDateTime.Day + 1);
-                var endResult = endAmountPerDay * endDateTime.Day;
+                var startResult = GetStartResult(startDateTime);
+                var endResult = GetEndResult(endDateTime);
                 var periodResult = GetPeriodResult(startDateTime, endDateTime);
 
                 budgetResult = (int)(startResult + endResult + periodResult);
             }
 
             return budgetResult;
+        }
+
+        private decimal GetStartResult(DateTime startDateTime)
+        {
+            var startAmountPerDay = GetAmountPerDay(startDateTime);
+            var startResult = startAmountPerDay * (DateTime.DaysInMonth(startDateTime.Year, startDateTime.Month) - startDateTime.Day + 1);
+
+            return startResult;
+        }
+
+        private decimal GetEndResult(DateTime endDateTime)
+        {
+            var endAmountPerDay = GetAmountPerDay(endDateTime);
+            var endResult = endAmountPerDay * endDateTime.Day;
+
+            return endResult;
         }
 
         private decimal GetPeriodResult(DateTime startDateTime, DateTime endDateTime)
