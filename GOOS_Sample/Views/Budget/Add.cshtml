@@ -1,0 +1,27 @@
+﻿@model GOOS_Sample.Models.BudgetViewModel
+@{
+    ViewBag.Title = "Add Budget";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("AddBudget", "Budget", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <h4>Add Budget</h4>
+    <hr />
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.TextBoxFor(i => i.Month, htmlAttributes: new { id = "month" })
+            @Html.TextBoxFor(i => i.Amount, htmlAttributes: new { id = "amount" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="save" id="save" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
